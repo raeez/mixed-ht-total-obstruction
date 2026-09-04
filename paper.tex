@@ -308,6 +308,19 @@ Its filtration is componentwise:
 \]
 \end{definition}
 
+\begin{example}[The tensor-product sign]\label{ex:tensor-sign}
+Let $\mathfrak a$ be abelian with $x\in\mathfrak a^0$,
+$y\in\mathfrak a^1$, $dx=y\neq0$, and $dy=0$.  If the second summand in
+\eqref{eq:tw-differential} were given a plus sign independently of
+$|\omega|$, then on $\Omega_1\otimes\mathfrak a$ the resulting operator
+$D_+$ would satisfy
+\[
+ D_+^2(t_0\otimes x)=2\,dt_0\otimes y\neq0.
+\]
+Thus the factor $(-1)^{|\omega|}$ is necessary even before imposing the face
+equations.
+\end{example}
+
 The signs in \eqref{eq:tw-differential}--\eqref{eq:tw-bracket} are forced by
 the tensor product convention.  In particular, replacing
 \eqref{eq:tw-end} by an ordinary normalized \v Cech total complex and
@@ -666,16 +679,48 @@ $[F^p,F^q]\subset F^{p+q-1}$.  Unary structure must be fixed and absorbed
 into the differential, or into a twist by a fixed base Maurer--Cartan
 element, before the positive-weight deformation variable is pronilpotent.
 
-A specified quasi-free resolution $\Omega\mathcal C\to\mathcal P$ of a
-reduced two-colored dg operad $\mathcal P$ identifies
-Maurer--Cartan elements of \eqref{eq:colored-convolution} with
-$\Omega\mathcal C$-algebra structures on $V$.  An operad cannot be placed in
-the cooperadic entry of \eqref{eq:colored-convolution} without such a bar or
-cobar construction.  Fixed endpoints may be imposed by twisting the full
-carrier by their base structure and taking the kernel of a strict filtered
-endpoint map.  If the endpoint map exists only up to coherent homotopy, its
-specified $L_\infty$ homotopy fibre is required; an unadorned mapping cone is
-only a complex and has no automatic nonlinear brackets.
+Here is the cobar convention compatible with our cohomological grading.  Put
+$(E[k])^n=E^{n+k}$, and let
+\[
+ \Omega_{\mathrm{coh}}\mathcal C
+ =\bigl(\mathcal F_{\mathrm{op}}(\overline{\mathcal C}[-1]),
+ d_\Omega\bigr).
+ \tag{5.11}\label{eq:cohomological-cobar}
+\]
+The inclusion of generators
+$\kappa:\overline{\mathcal C}\to
+\Omega_{\mathrm{coh}}\mathcal C$ has degree $1$.  The cobar differential is
+the unique operadic derivation determined by the universal twisting equation;
+writing $\gamma^{\mathcal F}_{(1)}$ for infinitesimal composition in the free
+colored operad, this equation is
+\[
+ d_\Omega\kappa(c)
+ =-\kappa(d_{\mathcal C}c)
+  -\gamma^{\mathcal F}_{(1)}(\kappa\circ_{(1)}\kappa)
+    \Delta_{(1)}(c).
+ \tag{5.12}\label{eq:cobar-differential}
+\]
+The cooperad identities give $d_\Omega^2=0$.  A dg operad map
+$\Phi:\Omega_{\mathrm{coh}}\mathcal C\to\End_V$ is determined by the
+degree-one element $\theta=\Phi\kappa$ and commutes with differentials exactly
+when
+\[
+ \partial\theta+\theta\star\theta
+ =\partial\theta+\frac12[\theta,\theta]=0.
+ \tag{5.13}\label{eq:cobar-mc}
+\]
+Thus Maurer--Cartan elements of \eqref{eq:colored-convolution} are precisely
+$\Omega_{\mathrm{coh}}\mathcal C$-algebra structures on $V$.  A specified
+quasi-free resolution
+$\Omega_{\mathrm{coh}}\mathcal C\to\mathcal P$ of a reduced two-colored dg
+operad $\mathcal P$ therefore supplies a carrier for homotopy
+$\mathcal P$-algebra structures.  An operad cannot be placed in the
+cooperadic entry of \eqref{eq:colored-convolution} without such a bar or cobar
+construction.  Fixed endpoints may be imposed by twisting the full carrier
+by their base structure and taking the kernel of a strict filtered endpoint
+map.  If the endpoint map exists only up to coherent homotopy, its specified
+$L_\infty$ homotopy fibre is required; an unadorned mapping cone is only a
+complex and has no automatic nonlinear brackets.
 
 Assume now that the weight filtration is split and that every bracket has
 output weight equal to the sum of its input weights.  Write a positive-weight
@@ -689,19 +734,19 @@ For a complete filtered $L_\infty$ carrier, the exact weight-$r$ equation is
  \sum_{n=2}^{r}\frac1{n!}
  \sum_{i_1+\cdots+i_n=r}
  q_n(\theta^{(i_1)},\ldots,\theta^{(i_n)})=0.
- \tag{5.11}\label{eq:general-weight-equation}
+ \tag{5.14}\label{eq:general-weight-equation}
 \]
 In the dg Lie case, a closed binary term $\theta^{(1)}$ has the first
 curvature
 \[
  \Curv(\theta^{(1)})
  \equiv\frac12[\theta^{(1)},\theta^{(1)}]\pmod {W^3},
- \tag{5.12}\label{eq:arity-three-curvature}
+ \tag{5.15}\label{eq:arity-three-curvature}
 \]
 and a ternary correction must solve
 \[
  d\theta^{(2)}=-\frac12[\theta^{(1)},\theta^{(1)}].
- \tag{5.13}\label{eq:ternary-correction}
+ \tag{5.16}\label{eq:ternary-correction}
 \]
 This is the universal arity-three obstruction; its value in a particular
 geometric theory depends on the specified colored compositions and signs.
