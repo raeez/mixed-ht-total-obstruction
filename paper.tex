@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,microtype}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Open Problem}
+\title{Total Maurer--Cartan Obstructions in Mixed Holomorphic--Topological Theory}
+\author{Raeez Lorgat}
+\date{}
+\hypersetup{
+  pdftitle={Total Maurer--Cartan Obstructions in Mixed Holomorphic--Topological Theory},
+  pdfauthor={Raeez Lorgat},
+  pdfsubject={Filtered differential graded Lie algebra obstruction theory}
+}
+\begin{document}
+\maketitle
+\begin{abstract}
+A local binary operation does not by itself determine a global all-arity
+open--closed theory.  We formulate the missing step as a complete filtered
+Maurer--Cartan problem and identify the obstruction encountered when a
+solution is lifted through one filtration stage.  Application to a concrete
+mixed holomorphic--topological theory requires the construction of the
+relevant descent algebra and is left open.
+\end{abstract}
+
+\section{The governing lifting problem}
+
+Let $(\mathfrak g,F^\bullet)$ be a complete descending filtered differential
+graded Lie algebra over a field of characteristic zero, with
+\[
+ \mathfrak g\cong\varprojlim_r\mathfrak g/F^r\mathfrak g,
+ \qquad [F^a\mathfrak g,F^b\mathfrak g]\subset F^{a+b}\mathfrak g,
+ \qquad dF^a\mathfrak g\subset F^a\mathfrak g.
+\]
+For $\alpha\in F^1\mathfrak g^1$, write
+$\mathcal F(\alpha)=d\alpha+\tfrac12[\alpha,\alpha]$.
+
+\begin{theorem}[One-stage obstruction]
+Suppose $\mathcal F(\alpha)\in F^{r}\mathfrak g^2$ for $r\geq2$.  Its class
+\[
+ o_r(\alpha)=[\mathcal F(\alpha)]\in
+ H^2(F^r\mathfrak g/F^{r+1}\mathfrak g,d_\alpha)
+\]
+is defined, where $d_\alpha=d+[\alpha,-]$.  A correction
+$\beta\in F^r\mathfrak g^1$ with
+$\mathcal F(\alpha+\beta)\in F^{r+1}\mathfrak g^2$ exists if and only if
+$o_r(\alpha)=0$.
+\end{theorem}
+
+\begin{proof}
+On $F^r\mathfrak g/F^{r+1}\mathfrak g$, the term $[\alpha,-]$ vanishes,
+so $d_\alpha$ induces the differential $d$.  Equivalently,
+$d_\alpha^2=[\mathcal F(\alpha),-]$ vanishes on this quotient because
+$[F^r\mathfrak g,F^r\mathfrak g]\subset F^{2r}\mathfrak g\subset
+F^{r+1}\mathfrak g$.
+The Bianchi identity gives
+$d_\alpha\mathcal F(\alpha)=0$.  Modulo $F^{r+1}$, changing $\alpha$ by
+$\beta\in F^r\mathfrak g^1$ changes its curvature by $d_\alpha\beta$;
+the quadratic term $[\beta,\beta]/2$ lies in $F^{2r}\subset F^{r+1}$.
+Thus the curvature can be killed at the next stage precisely when its class
+is exact.
+\end{proof}
+
+\section{The mixed theory still to be constructed}
+
+For a mixed holomorphic--topological application, the desired
+$\mathfrak g$ must totalize local operations, open--closed actions, centre
+maps, cover descent, counterterms, and comparison homotopies in one declared
+grading and completion.  Naming these components separately does not prove
+that their brackets close or that the inverse limit is derived-complete.
+
+\begin{problem}
+Construct this filtered algebra for one nontrivial Stein or formal local model,
+compute its first nonzero obstruction class, and either construct compatible
+primitives at every arity or prove that no such global lift exists.
+\end{problem}
+\end{document}
