@@ -1,171 +1,1051 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=-1
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,microtype}
-\usepackage[margin=1.15in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage[hidelinks]{hyperref}
+
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
-\title{Maurer--Cartan Obstructions in Filtered dg Lie Algebras}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\MC}{\operatorname{MC}}
+\newcommand{\Curv}{\operatorname{Curv}}
+\newcommand{\TW}{\operatorname{TW}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Conv}{\operatorname{Conv}}
+\newcommand{\Cone}{\operatorname{Cone}}
+\newcommand{\Tot}{\operatorname{Tot}}
+\newcommand{\gr}{\operatorname{gr}}
+\newcommand{\Rlim}{\mathbf R\!\varprojlim}
+
+\title{Maurer--Cartan Obstruction Towers in Completed Totalizations}
 \author{Raeez Lorgat}
 \date{}
 \hypersetup{
-  pdftitle={Maurer--Cartan Obstructions in Filtered dg Lie Algebras},
+  pdftitle={Maurer--Cartan Obstruction Towers in Completed Totalizations},
   pdfauthor={Raeez Lorgat},
-  pdfsubject={Filtered differential graded Lie algebra obstruction theory}
+  pdfsubject={Filtered and totalized deformation theory},
+  pdfcreator={},
+  pdfproducer={}
 }
+
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Lifting a Maurer--Cartan solution through one step of a descending filtration
-is governed by a degree-two cohomology class.  This statement is finite: it
-requires neither completeness nor passage to an inverse limit.  We prove the
-lifting criterion, exhibit a two-step nilpotent differential graded Lie
-algebra with a nonzero obstruction, and then state the separate completeness
-hypothesis that turns compatible stagewise lifts into an actual
-Maurer--Cartan element.
+Local deformation conditions often appear as projections of one nonlinear
+equation.  Their separate vanishing need not kill the common curvature.  We
+construct the common carrier for a semicosimplicial diagram as a completed
+Thom--Whitney differential graded Lie algebra and prove its full obstruction
+tower.  Strict completeness identifies compatible Maurer--Cartan
+representatives with a total solution.  Gauge classes obey a different limit
+theorem: a generally nonabelian $\varprojlim^1$ of derived stabilizers measures
+their ambiguity.  A second Milnor sequence controls compatible primitives in
+inverse systems of complexes.  We also give the filtered $L_\infty$ form, the
+convolution carrier for comparison morphisms, and sharp examples showing why
+completeness, separation, additive filtration, flatness, and totalization
+hypotheses cannot be omitted.
 \end{abstract}
 
-\section{The lifting problem}
+\section{A curvature invisible in every projected equation}
 
-Let $\Bbbk$ be a field of characteristic zero.  A descending filtered
-differential graded Lie algebra is a differential graded Lie algebra
-$(\mathfrak g,d,[-,-])$ together with subcomplexes
+Let $\Bbbk$ be a field of characteristic zero.  We use cohomological degrees:
+$d$ has degree $1$, and the bracket satisfies
 \[
- \mathfrak g=F^1\mathfrak g\supset F^2\mathfrak g\supset\cdots,
+ [u,v]=-(-1)^{|u||v|}[v,u],
  \qquad
- [F^a\mathfrak g,F^b\mathfrak g]\subset F^{a+b}\mathfrak g.
+ d[u,v]=[du,v]+(-1)^{|u|}[u,dv].
 \]
-For $\alpha\in F^1\mathfrak g^1$, its curvature and twisted derivation are
+For an element $a$ of degree $1$, write
 \[
- \mathcal F(\alpha)=d\alpha+\frac12[\alpha,\alpha],
- \qquad d_\alpha=d+[\alpha,-].
+ \Curv(a)=da+\frac12[a,a].
 \]
 
-\begin{theorem}[One-stage obstruction]
-Fix $r\geq2$ and suppose
-$\mathcal F(\alpha)\in F^r\mathfrak g^2$.  On
-$F^r\mathfrak g/F^{r+1}\mathfrak g$, the operator $d_\alpha$ induces the
-same differential as $d$, and the class
+\begin{example}[The first missing equation]\label{ex:first}
+Let
 \[
- o_r(\alpha)=[\mathcal F(\alpha)]
- \in H^2(F^r\mathfrak g/F^{r+1}\mathfrak g,d)
+ \mathfrak g^1=\Bbbk x,
+ \qquad
+ \mathfrak g^2=\Bbbk z,
+ \qquad
+ d=0,
+ \qquad
+ [x,x]=2z,
 \]
-is defined.  There is a correction $\beta\in F^r\mathfrak g^1$ such that
+with $z$ central.  Give $\mathfrak g$ the filtration
 \[
- \mathcal F(\alpha+\beta)\in F^{r+1}\mathfrak g^2
+ F^1\mathfrak g=\mathfrak g,
+ \qquad
+ F^2\mathfrak g=\Bbbk z,
+ \qquad
+ F^3\mathfrak g=0.
 \]
-if and only if $o_r(\alpha)=0$.
+Then
+\[
+ \Curv(x)=z.
+\]
+Thus $x$ is Maurer--Cartan modulo $F^2\mathfrak g$, but it does not lift
+modulo $F^3\mathfrak g$.  Moreover, the projection
+\[
+ p:\mathfrak g\longrightarrow \mathfrak g/F^2\mathfrak g
+\]
+sends $x$ to a Maurer--Cartan element and sends its curvature to zero.  A
+family of such projections can therefore erase a nonzero common obstruction.
+The obstruction is not a list of projected classes: here it is the single
+class
+\[
+ [z]\in H^2(F^2\mathfrak g/F^3\mathfrak g)=\Bbbk z.
+\]
+\end{example}
+
+This calculation dictates the order of the construction.  One first needs a
+single filtered carrier in which all operations and comparisons coexist.
+Only then does it make sense to form its curvature, take its associated
+graded class, and compare that class with the equations visible in individual
+targets.
+
+\section{The finite obstruction step}
+
+\begin{definition}\label{def:filtered-dgla}
+An \emph{additively filtered dg Lie algebra} is an uncurved dg Lie algebra
+$(\mathfrak g,d,[-,-])$ with a descending filtration by subcomplexes
+\[
+ \mathfrak g=F^1\mathfrak g\supset F^2\mathfrak g\supset\cdots
+\]
+such that
+\[
+ [F^p\mathfrak g,F^q\mathfrak g]\subset F^{p+q}\mathfrak g.
+\]
+It is \emph{strictly complete and separated} when the canonical map
+\[
+ \mathfrak g\longrightarrow
+ \varprojlim_r\mathfrak g/F^r\mathfrak g
+ \tag{2.1}\label{eq:strict-completion}
+\]
+is an isomorphism of graded vector spaces, hence of complexes.
+We abbreviate
+\[
+ \mathfrak g_r=\mathfrak g/F^{r+1}\mathfrak g,
+ \qquad
+ A_r=F^r\mathfrak g/F^{r+1}\mathfrak g.
+\]
+\end{definition}
+
+The extension
+\[
+ 0\longrightarrow A_r\longrightarrow \mathfrak g_r
+ \longrightarrow \mathfrak g_{r-1}\longrightarrow0
+ \tag{2.2}\label{eq:central-extension}
+\]
+is central and has square-zero bracket on its kernel.  This elementary fact is
+the entire linearization mechanism.
+
+\begin{theorem}[One-stage obstruction and relative lifts]
+\label{thm:one-stage}
+Let $r\geq1$, and let $a_{r-1}\in\MC(\mathfrak g_{r-1})$.  For any graded
+lift $\widetilde a\in\mathfrak g_r^1$, its curvature belongs to $A_r^2$ and
+determines a lift-independent class
+\[
+ o_r(a_{r-1})=[\Curv(\widetilde a)]
+ \in H^2(A_r,d).
+ \tag{2.3}\label{eq:obstruction-class}
+\]
+The element $a_{r-1}$ lifts to $\MC(\mathfrak g_r)$ if and only if
+$o_r(a_{r-1})=0$.
+
+If lifts exist, their set is a torsor under $Z^1(A_r,d)$.  After quotienting
+only by gauge transformations that reduce to the identity on
+$\mathfrak g_{r-1}$, the set of lifts is a torsor under $H^1(A_r,d)$, and
+the relative stabilizer is $Z^0(A_r,d)$.
 \end{theorem}
 
 \begin{proof}
-Since $\alpha\in F^1\mathfrak g$, the operator $[\alpha,-]$ maps
-$F^r\mathfrak g$ into $F^{r+1}\mathfrak g$; hence $d_\alpha$ induces $d$ on
-the quotient.  The Bianchi identity
+The twisted operator $d_{\widetilde a}=d+[\widetilde a,-]$ induces $d$ on
+$A_r$, because
 \[
- d_\alpha\mathcal F(\alpha)=0
+ [F^1\mathfrak g,F^r\mathfrak g]\subset F^{r+1}\mathfrak g.
 \]
-then says that the image of $\mathcal F(\alpha)$ is a $d$-cocycle.  For
-$\beta\in F^r\mathfrak g^1$,
+The Bianchi identity
 \[
- \mathcal F(\alpha+\beta)
- =\mathcal F(\alpha)+d_\alpha\beta+\frac12[\beta,\beta].
+ d_{\widetilde a}\Curv(\widetilde a)=0
+ \tag{2.4}\label{eq:bianchi}
 \]
-Modulo $F^{r+1}\mathfrak g$, the middle term becomes $d\beta$ and the last
-term vanishes because $F^{2r}\mathfrak g\subset F^{r+1}\mathfrak g$.
-Thus a correction exists precisely when the curvature cocycle is a
-coboundary, with the sign absorbed by replacing a primitive by its negative.
+therefore makes the curvature a cocycle in $A_r$.  A second lift has the form
+$\widetilde a+\beta$ with $\beta\in A_r^1$, and centrality in
+\eqref{eq:central-extension} gives the exact identity in $\mathfrak g_r$
+\[
+ \Curv(\widetilde a+\beta)=\Curv(\widetilde a)+d\beta.
+ \tag{2.5}\label{eq:linear-correction}
+\]
+This proves independence and the lifting criterion.  Once a lift is fixed,
+all others differ from it by $Z^1(A_r)$.
+
+The relative gauge group is $\exp(A_r^0)$.  Since $A_r$ is central in
+$\mathfrak g_r$, its action is
+\[
+ \widetilde a\longmapsto\widetilde a-d\xi,
+ \qquad \xi\in A_r^0.
+\]
+Taking relative orbits and stabilizers gives $H^1(A_r)$ and $Z^0(A_r)$.
 \end{proof}
 
-No completeness assumption occurs in the statement or proof: every object in
-the obstruction class belongs to the single quotient
-$F^r\mathfrak g/F^{r+1}\mathfrak g$.
+Quotienting by all gauge transformations lying above a gauge orbit in
+$\mathfrak g_{r-1}$ is different: the stabilizer of the base element can act
+on $H^1(A_r)$.  The torsor assertion in Theorem~\ref{thm:one-stage} is
+deliberately relative.
 
-\section{A nonzero obstruction}
+For a strictly complete filtered dg Lie algebra the Baker--Campbell--Hausdorff
+series converges on $F^1\mathfrak g^0$.  With our signs the gauge action is
+\[
+ e^\xi\cdot a
+ =e^{\operatorname{ad}\xi}a
+ -\frac{e^{\operatorname{ad}\xi}-1}{\operatorname{ad}\xi}(d\xi)
+ =a-\sum_{n\geq0}
+ \frac{(\operatorname{ad}\xi)^n}{(n+1)!}\,d_a\xi .
+ \tag{2.6}\label{eq:gauge-action}
+\]
+Its infinitesimal vector is $-d_a\xi$, and
+\[
+ \Curv(e^\xi\cdot a)
+ =e^{\operatorname{ad}\xi}\Curv(a).
+ \tag{2.7}\label{eq:gauge-curvature}
+\]
+The series converge because every additional bracket with $\xi\in F^1$
+moves a term at least one step deeper.  Equation~\eqref{eq:gauge-curvature}
+also shows directly that \eqref{eq:obstruction-class} is gauge invariant.
 
-\begin{example}
-Let $\mathfrak g$ be the two-dimensional graded vector space
+\begin{corollary}[The recursive curvature equation]\label{cor:weights}
+Suppose that the filtration is split by a complete weight decomposition
 \[
- \mathfrak g^1=\Bbbk x,
- \qquad \mathfrak g^2=\Bbbk z,
-\]
-with zero differential and graded Lie bracket
-\[
- [x,x]=2z,
- \qquad [x,z]=[z,z]=0.
-\]
-The element $z$ is central, so the graded Jacobi identity holds and
-$\mathfrak g$ is two-step nilpotent.  Give it the filtration
-\[
- F^1\mathfrak g=\mathfrak g,
- \qquad F^2\mathfrak g=\Bbbk z,
- \qquad F^r\mathfrak g=0\quad(r\geq3).
-\]
-For $\alpha=x$, one has
-\[
- \mathcal F(x)=z\in F^2\mathfrak g^2.
-\]
-The complex $F^2\mathfrak g/F^3\mathfrak g$ has zero differential and no
-degree-one part.  Therefore
-\[
- o_2(x)=[z]\neq0
- \quad\text{in}\quad
- H^2(F^2\mathfrak g/F^3\mathfrak g)\cong\Bbbk z,
-\]
-and no correction in $F^2\mathfrak g^1=0$ can lift $x$ to a
-Maurer--Cartan element modulo $F^3$.
-\end{example}
-
-\section{Passage from stages to a limit}
-
-The filtration is \emph{strictly complete and separated} if the canonical
-map of complexes
-\[
- \mathfrak g\longrightarrow\varprojlim_r\mathfrak g/F^r\mathfrak g
-\]
-is an isomorphism.  This condition is not needed at any finite stage, but it
-is the elementary hypothesis that makes an infinite sum of corrections an
-element of $\mathfrak g$.
-
-\begin{proposition}[Compatible lifts]
-Assume that $\mathfrak g$ is strictly complete and separated.  Suppose
-$\alpha_1\in F^1\mathfrak g^1$ satisfies
-$\mathcal F(\alpha_1)\in F^2\mathfrak g^2$ and, for every $r\geq2$, there is
-$\beta_r\in F^r\mathfrak g^1$ such that, recursively,
-\[
- \alpha_r=\alpha_1+\sum_{j=2}^{r-1}\beta_j,
+ \mathfrak g=\prod_{p\geq1}\mathfrak g^{(p)},
  \qquad
- \mathcal F(\alpha_r)\in F^r\mathfrak g^2,
- \qquad
- \mathcal F(\alpha_r+\beta_r)\in F^{r+1}\mathfrak g^2.
+ F^r\mathfrak g=\prod_{p\geq r}\mathfrak g^{(p)},
 \]
-Then the convergent sum
+and that $d\mathfrak g^{(p)}\subset\mathfrak g^{(p)}$ and
+$[\mathfrak g^{(i)},\mathfrak g^{(j)}]
+\subset\mathfrak g^{(i+j)}$.  Write
 \[
- \alpha_\infty=\alpha_1+\sum_{r\geq2}\beta_r
+ a=\sum_{p\geq1}a^{(p)},
+ \qquad a^{(p)}\in \mathfrak g^{(p),1}.
 \]
-is a Maurer--Cartan element of $\mathfrak g$.
+Then its weight-$r$ Maurer--Cartan equation is
+\[
+ da^{(r)}+\frac12
+ \sum_{i+j=r}[a^{(i)},a^{(j)}]=0.
+ \tag{2.8}\label{eq:weight-equation-dgla}
+\]
+Consequently the first unknown correction is governed by the class of the
+known quadratic term in $H^2(\gr_F^r\mathfrak g,d)$.
+\end{corollary}
+
+\section{The completed Thom--Whitney carrier}
+
+Let $\mathfrak g^\bullet$ be a semicosimplicial additively filtered dg Lie
+algebra.  Thus there are filtration-preserving coface maps
+\[
+ \partial^i:\mathfrak g^{q-1}\longrightarrow\mathfrak g^q
+ \quad (0\leq i\leq q)
+\]
+satisfying the semicosimplicial identities, and each $\mathfrak g^q$ is
+strictly complete and separated.  Put
+\[
+ \Omega_q=
+ \frac{\Bbbk[t_0,\ldots,t_q,dt_0,\ldots,dt_q]}
+ {\bigl(\sum_i t_i-1,\sum_i dt_i\bigr)},
+ \qquad |t_i|=0,\quad |dt_i|=1,
+\]
+with $d_{\mathrm{dR}}t_i=dt_i$.  The pullback to the $i$th face is denoted
+$\delta_i^*:\Omega_q\to\Omega_{q-1}$.  Define the completed tensor product
+by
+\[
+ \Omega_q\widehat\otimes\mathfrak g^q
+ =\varprojlim_r
+ \bigl(\Omega_q\otimes(\mathfrak g^q/F^r\mathfrak g^q)\bigr).
+ \tag{3.1}\label{eq:completed-tensor}
+\]
+
+\begin{definition}[Completed Thom--Whitney end]\label{def:tw}
+The completed Thom--Whitney totalization is
+\[
+ \widehat\TW(\mathfrak g^\bullet)=
+ \left\{
+ (x_q)_{q\geq0}\in
+ \prod_{q\geq0}\Omega_q\widehat\otimes\mathfrak g^q
+ \ \middle|
+ (\delta_i^*\otimes1)x_q=(1\otimes\partial^i)x_{q-1}
+ \right\}.
+ \tag{3.2}\label{eq:tw-end}
+\]
+On homogeneous tensors its differential and bracket are
+\begin{align}
+ D(\omega\otimes x)
+ &=d_{\mathrm{dR}}\omega\otimes x
+   +(-1)^{|\omega|}\omega\otimes dx,
+ \tag{3.3}\label{eq:tw-differential}\\
+ [\omega\otimes x,\eta\otimes y]
+ &=(-1)^{|x||\eta|}\omega\eta\otimes[x,y].
+ \tag{3.4}\label{eq:tw-bracket}
+\end{align}
+Its filtration is componentwise:
+\[
+ F^r\widehat\TW=
+ \widehat\TW\cap
+ \prod_q\ker\!\left(
+ \Omega_q\widehat\otimes\mathfrak g^q
+ \longrightarrow
+ \Omega_q\otimes(\mathfrak g^q/F^r\mathfrak g^q)
+ \right).
+ \tag{3.5}\label{eq:tw-filtration}
+\]
+\end{definition}
+
+The signs in \eqref{eq:tw-differential}--\eqref{eq:tw-bracket} are forced by
+the tensor product convention.  In particular, replacing
+\eqref{eq:tw-end} by an ordinary normalized \v Cech total complex and
+appending a symbol for the \v Cech differential does not produce a dg Lie
+bracket.  The normalized total complex instead receives transferred
+$L_\infty$ operations from the Thom--Whitney model
+\cite{FiorenzaManettiMartinengo}.
+
+\begin{proposition}[Completeness of the total carrier]\label{prop:tw-complete}
+The formulas above make
+$T=\widehat\TW(\mathfrak g^\bullet)$ a strictly complete and separated
+additively filtered dg Lie algebra.  For
+\[
+ T_r=\TW(\mathfrak g^\bullet/F^r\mathfrak g^\bullet),
+\]
+the canonical map $T/F^rT\to T_r$ is injective.  Define
+\[
+ I_r=\operatorname{im}(T\longrightarrow T_r).
+\]
+Thus $I_r$ consists exactly of the finite-stage elements that admit one
+coherent lift through all deeper stages.  One has
+\[
+ T\cong\varprojlim_r T_r\cong\varprojlim_r I_r.
+ \tag{3.6}\label{eq:stable-image-limit}
+\]
+If every projection $T\to T_r$ is surjective, then $I_r=T_r$ and
+$T/F^rT\cong T_r$.
 \end{proposition}
 
 \begin{proof}
-The partial sums are compatible in every quotient
-$\mathfrak g/F^r\mathfrak g$, so strict completeness gives a unique limit
-$\alpha_\infty\in\mathfrak g^1$.  The differential and bracket are continuous
-for the filtration.  For every $r$, the image of
-$\mathcal F(\alpha_\infty)$ in $\mathfrak g/F^r\mathfrak g$ equals the image
-of $\mathcal F(\alpha_r)$ and is zero.  Separatedness therefore implies
-$\mathcal F(\alpha_\infty)=0$.
+The product in \eqref{eq:tw-end} is complete.  The face equations cut out the
+kernel of a continuous linear map to a separated product, hence a closed
+complete subspace.  Equations \eqref{eq:tw-differential} and
+\eqref{eq:tw-bracket} preserve the face equations.  Their componentwise
+form gives
+\[
+ D(F^rT)\subset F^rT,
+ \qquad
+ [F^pT,F^qT]\subset F^{p+q}T.
+\]
+Inverse limits commute with products and equalizers, so the definition also
+gives $T\cong\varprojlim_rT_r$.
+The kernel of $T\to T_r$ is exactly $F^rT$, proving injectivity of the
+induced map and identifying its image with $I_r$.  A compatible sequence in
+the $I_r$ is, component by component, a compatible sequence in every local
+quotient; completeness gives an element of the ambient product, and
+separatedness makes all face equations hold.  This proves
+\eqref{eq:stable-image-limit}.  The last assertion is immediate.
 \end{proof}
 
-\paragraph{Derived completeness.}
-Let $D$ denote the derived inverse limit of the quotient tower
-$(\mathfrak g/F^r\mathfrak g)_r$.  Derived completeness means that the
-canonical map $\mathfrak g\to D$ is a quasi-isomorphism.  Here the quotient
-maps are surjective in every degree, so the ordinary limit represents $D$;
-strict completeness implies derived completeness.  The converse does not
-supply an elementwise convergent sum in $\mathfrak g$, which is why the
-proposition uses strict completeness.  Neither condition enters the
-one-stage theorem.
+Levelwise surjectivity of
+$\mathfrak g^q/F^{r+1}\to\mathfrak g^q/F^r$ does not by itself imply
+surjectivity after taking the end \eqref{eq:tw-end}.  Proposition
+\ref{prop:tw-complete} isolates the extra strictness needed to identify every
+algebraic finite totalization with a quotient of the completed one.
+
+\begin{theorem}[Filtered and totalized obstruction tower]
+\label{thm:total-obstruction}
+Let $T=\widehat\TW(\mathfrak g^\bullet)$.  For every $r\geq1$ and every
+$a_{r-1}\in\MC(T/F^rT)$ there is a canonical class
+\[
+ o_r(a_{r-1})\in
+ H^2(F^rT/F^{r+1}T,D)
+ \tag{3.7}\label{eq:total-obstruction}
+\]
+whose vanishing is equivalent to a lift in $\MC(T/F^{r+1}T)$.  When lifts
+exist, the relative lift and relative gauge-orbit spaces are torsors under
+$Z^1(F^rT/F^{r+1}T)$ and $H^1(F^rT/F^{r+1}T)$, respectively.
+
+A compatible sequence
+\[
+ a_r\in\MC(T/F^{r+1}T),
+ \qquad a_r\equiv a_{r-1}\pmod {F^rT},
+ \tag{3.8}\label{eq:compatible-tower}
+\]
+determines a unique element $a\in\MC(T)$.  If the strictness condition
+$T/F^rT\cong T_r$ holds, the same assertions may be read directly in the
+finite Thom--Whitney totalizations $T_r$.
+\end{theorem}
+
+\begin{proof}
+The finite assertions are Theorem~\ref{thm:one-stage} applied to $T$.
+Proposition~\ref{prop:tw-complete} gives a unique degree-one element $a\in T$
+from \eqref{eq:compatible-tower}.  Its curvature is zero in every quotient,
+so
+\[
+ \Curv(a)\in\bigcap_rF^rT^2=0.
+\]
+\end{proof}
+
+A natural transformation of semicosimplicial filtered dg Lie algebras
+induces a strict filtered map of completed Thom--Whitney carriers.  More
+generally, suppose
+\[
+ P_i:T\longrightarrow R_i\qquad(i\in J)
+\]
+are filtered dg Lie maps, let
+$a_{r-1}\in\MC(T/F^rT)$, and write
+\[
+ (P_i)_{r-1}:T/F^rT\longrightarrow R_i/F^rR_i
+\]
+for the induced map.  Naturality of curvature gives
+\[
+ o_r\bigl((P_i)_{r-1}(a_{r-1})\bigr)=
+ H^2(\gr_F^rP_i)\,o_r(a_{r-1}).
+ \tag{3.9}\label{eq:row-obstruction}
+\]
+Hence the vanishing of all projected classes forces the total class to
+vanish when
+\[
+ H^2(\gr_F^rT)\longrightarrow
+ \prod_{i\in J}H^2(\gr_F^rR_i)
+ \tag{3.10}\label{eq:joint-injectivity}
+\]
+is injective.  Without this hypothesis, or a direct construction assembling
+the projected primitives into a primitive in $T$, the converse fails by
+Example~\ref{ex:first}.
+
+\section{Complete filtered \texorpdfstring{$L_\infty$}{L-infinity} algebras}
+
+To keep every degree visible, we now use the shifted symmetric convention.
+A flat shifted $L_\infty$ algebra is a graded vector space $L$ with graded
+symmetric maps
+\[
+ q_n:S^nL\longrightarrow L,
+ \qquad |q_n|=1,
+ \qquad n\geq1,
+ \tag{4.1}\label{eq:shifted-brackets}
+\]
+whose induced coderivation on the reduced symmetric coalgebra squares to
+zero.  There is no nullary bracket.  If $L=\mathfrak g[1]$, degree $0$ in
+$L$ corresponds to degree $1$ in the unshifted dg Lie algebra
+$\mathfrak g$; consequently $H^1(L,q_1)$ corresponds to
+$H^2(\mathfrak g,d)$.
+
+Assume
+\[
+ L=F^1L\supset F^2L\supset\cdots,
+ \qquad
+ q_n(F^{p_1}L,\ldots,F^{p_n}L)
+ \subset F^{p_1+\cdots+p_n}L,
+ \qquad
+ L\cong\varprojlim_rL/F^rL.
+ \tag{4.2}\label{eq:linfty-filtration}
+\]
+For $a\in L^0$, define
+\begin{align}
+ R(a)&=\sum_{n\geq1}\frac1{n!}q_n(a^n),
+ \tag{4.3}\label{eq:linfty-curvature}\\
+ q_m^a(x_1,\ldots,x_m)
+ &=\sum_{k\geq0}\frac1{k!}
+ q_{m+k}(a^k,x_1,\ldots,x_m).
+ \tag{4.4}\label{eq:twist}
+\end{align}
+The $n$th summand in \eqref{eq:linfty-curvature} lies in $F^nL$, so the
+series converges.  Additivity similarly gives convergence of every twisted
+bracket.  The $L_\infty$ identities imply
+\begin{align}
+ q_1^aR(a)&=0,
+ \tag{4.5}\label{eq:linfty-bianchi}\\
+ R(a+b)&=R(a)+
+ \sum_{m\geq1}\frac1{m!}q_m^a(b^m).
+ \tag{4.6}\label{eq:linfty-translation}
+\end{align}
+These formulas and their filtered convergence are developed in
+\cite{DolgushevRogers,RogersComplete}.
+
+\begin{proposition}[The $L_\infty$ obstruction]\label{prop:linfty-obstruction}
+If $R(a)\in F^rL^1$, then its image defines
+\[
+ o_r(a)=[R(a)]\in H^1(F^rL/F^{r+1}L,q_1).
+ \tag{4.7}\label{eq:shifted-obstruction}
+\]
+There is $b\in F^rL^0$ with $R(a+b)\in F^{r+1}L$ if and only if
+$o_r(a)=0$.
+\end{proposition}
+
+\begin{proof}
+On $F^r/F^{r+1}$ the operator $q_1^a$ reduces to $q_1$, so
+\eqref{eq:linfty-bianchi} makes $R(a)$ a $q_1$-cocycle.  For
+$b\in F^rL^0$, every term of \eqref{eq:linfty-translation} except
+$q_1b$ lies in $F^{r+1}L$.  Thus
+\[
+ R(a+b)\equiv R(a)+q_1b\pmod {F^{r+1}L}.
+\]
+\end{proof}
+
+Without completeness the infinite expression \eqref{eq:linfty-curvature}
+need not exist in $L$.  The finite statement remains valid inside
+$L/F^{r+1}L$, where additivity makes all but finitely many summands vanish.
+
+A filtered shifted $L_\infty$ morphism $U:L\rightsquigarrow M$ has degree-zero
+Taylor coefficients
+\[
+ U_n:S^nL\longrightarrow M,
+ \qquad
+ U_n(F^{p_1},\ldots,F^{p_n})\subset F^{p_1+\cdots+p_n}M.
+\]
+It defines
+\[
+ U_*(a)=\sum_{n\geq1}\frac1{n!}U_n(a^n),
+\]
+and satisfies the off-shell curvature identity
+\[
+ R_M(U_*(a))=
+ \sum_{m\geq0}\frac1{m!}
+ U_{m+1}(a^m,R_L(a)).
+ \tag{4.8}\label{eq:curvature-transport}
+\]
+Consequently
+\[
+ o_r(U_*a)=H^1(\gr_F^rU_1)o_r(a).
+ \tag{4.9}\label{eq:linfty-naturality}
+\]
+For a non-strict morphism the right side of
+\eqref{eq:curvature-transport} is not merely $U_1R_L(a)$.
+
+There is no canonical exponential gauge group for a general
+$L_\infty$ algebra.  Its intrinsic equivalence relation is defined by the
+connected components of the completed simplicial Maurer--Cartan set
+\[
+ \MC_\bullet(L)=
+ \MC\!\left(L\widehat\otimes
+ \Omega_{\mathrm{poly}}(\Delta^\bullet)\right),
+ \qquad
+ L\widehat\otimes\Omega_n
+ =\varprojlim_r(L/F^rL)\otimes\Omega_n.
+ \tag{4.10}\label{eq:mc-simplicial}
+\]
+For dg Lie algebras this recovers the homotopy theory of
+\eqref{eq:gauge-action}; for nilpotent quotients it is the
+Deligne--Getzler--Hinich construction \cite{Getzler}.
+
+\section{Comparison morphisms and colored operations}
+
+The Taylor coefficients of a comparison morphism themselves form a complete
+filtered carrier.  Let $L$ and $M$ be flat shifted $L_\infty$ algebras, let
+$C(L)=\overline S^c(L)$ carry the coderivation $Q_L$, and set
+\[
+ \mathcal H(L,M)
+ =\operatorname{Hom}(C(L),M)
+ =\prod_{n\geq1}\operatorname{Hom}(S^nL,M).
+ \tag{5.1}\label{eq:comparison-carrier}
+\]
+Continuous homomorphisms and completed symmetric powers are understood when
+$L$ and $M$ have additional complete linear topologies.  The arity filtration
+is
+\[
+ F^p\mathcal H(L,M)
+ =\prod_{n\geq p}\operatorname{Hom}(S^nL,M).
+ \tag{5.2}\label{eq:comparison-filtration}
+\]
+If $f$ is homogeneous, the unary bracket is
+\[
+ q_1^{\mathcal H}(f)=q_1^M\circ f-(-1)^{|f|}f\circ Q_L,
+ \tag{5.3}\label{eq:comparison-differential}
+\]
+and for $m\geq2$ the value
+$q_m^{\mathcal H}(h_1,\ldots,h_m)$ is obtained by applying the $m$-fold
+reduced coproduct of $C(L)$, then $h_1\otimes\cdots\otimes h_m$ with
+Koszul symmetrization, and finally $q_m^M$.  Thus
+\[
+ q_m^{\mathcal H}(F^{p_1},\ldots,F^{p_m})
+ \subset F^{p_1+\cdots+p_m}\mathcal H.
+ \tag{5.4}\label{eq:comparison-additivity}
+\]
+The $L_\infty$ identities follow from $Q_L^2=Q_M^2=0$.  A degree-zero
+element $f=(f_1,f_2,\ldots)$ is Maurer--Cartan precisely when the coalgebra
+map determined by its Taylor coefficients obeys
+\[
+ Q_MF=FQ_L;
+ \tag{5.5}\label{eq:comparison-equation}
+\]
+that is, precisely when $F:L\rightsquigarrow M$ is an $L_\infty$ morphism.
+This convolution construction is treated systematically in
+\cite{RobertNicoudWierstra}.
+
+A chain map alone does not suffice.  For example, let $L$ be the abelian dg
+Lie algebra on a degree-one element $x$, and let $M$ have degree-one element
+$y$, degree-two central element $z$, zero differential, and
+$[y,y]=2z$.  The linear chain map $x\mapsto y$ sends a Maurer--Cartan element
+to an element of curvature $z$.  The missing bracket identity is one of the
+higher equations in \eqref{eq:comparison-equation}.
+
+There is a parallel carrier for colored algebraic structures.  Let
+$\mathcal C$ be a reduced conilpotent coaugmented two-colored dg cooperad with
+coaugmentation coideal $\overline{\mathcal C}$.  Reduced means that all
+arity-zero terms vanish and that $\overline{\mathcal C}$ has no arity-one
+term.  For a two-colored cochain complex $V=(V_\mathrm c,V_\mathrm o)$, define
+\[
+ \End_V(c_1,\ldots,c_n;c)
+ =\operatorname{Hom}
+ (V_{c_1}\otimes\cdots\otimes V_{c_n},V_c).
+\]
+The convolution dg Lie algebra is
+\[
+ \Conv(\overline{\mathcal C},\End_V)
+ =\prod_{\vec c;c}
+ \operatorname{Hom}_{\Sigma_{\vec c}}
+ \bigl(\overline{\mathcal C}(\vec c;c),
+       \End_V(\vec c;c)\bigr).
+ \tag{5.6}\label{eq:colored-convolution}
+\]
+For homogeneous $f$ its differential is
+\[
+ \partial f=d_{\End}f-(-1)^{|f|}f\,d_{\mathcal C}.
+ \tag{5.7}\label{eq:convolution-differential}
+\]
+If $\Delta_{(1)}$ is the infinitesimal cooperadic decomposition and
+$\gamma_{(1)}$ is infinitesimal composition in $\End_V$, put
+\[
+ f\star g=\gamma_{(1)}(f\circ_{(1)}g)\Delta_{(1)},
+ \qquad
+ [f,g]=f\star g-(-1)^{|f||g|}g\star f.
+ \tag{5.8}\label{eq:convolution-bracket}
+\]
+All permutation and insertion signs in \eqref{eq:convolution-bracket} are
+the Koszul signs of the colored symmetric sequences.
+
+There is also a precise filtered topological version.  Suppose each $V_c$ has
+a complete separated filtration $G^0V_c=V_c\supset G^1V_c\supset\cdots$
+preserved by its differential.  Give an algebraic tensor product the total
+filtration
+\[
+ G^r(V_{c_1}\otimes\cdots\otimes V_{c_n})
+ =\sum_{\substack{r_1,\ldots,r_n\geq0\\r_1+\cdots+r_n\geq r}}
+ G^{r_1}V_{c_1}\otimes\cdots\otimes G^{r_n}V_{c_n}
+\]
+and define its completed tensor product as the inverse limit of the
+quotients by $G^r$.  Replacing $\operatorname{Hom}$ above by continuous
+linear maps gives a topological endomorphism operad provided that
+substitution is continuous; this continuity and the associativity of the
+completed tensor product are explicit hypotheses.  Under them,
+\eqref{eq:convolution-differential}--\eqref{eq:convolution-bracket} extend
+continuously.
+
+Suppose $\mathcal C=\bigoplus_{w\geq1}\mathcal C^{(w)}$, its differential
+preserves weight, and $\Delta_{(1)}$ splits weight additively.  Maps vanishing
+on weights below $p$ form a complete product filtration $W^p$, and
+\[
+ [W^p,W^q]\subset W^{p+q}.
+ \tag{5.9}\label{eq:weight-additivity}
+\]
+For an arity filtration under operadic insertion the correct positive weight
+is arity minus one, since
+\[
+ (m-1)+(n-1)=(m+n-1)-1.
+\]
+Thus
+\[
+ W^p=\{\text{operations of total arity at least }p+1\}
+ \tag{5.10}\label{eq:arity-weight}
+\]
+is additive, whereas filtration by arity at least $p$ satisfies only
+$[F^p,F^q]\subset F^{p+q-1}$.  Unary structure must be fixed and absorbed
+into the differential, or into a twist by a fixed base Maurer--Cartan
+element, before the positive-weight deformation variable is pronilpotent.
+
+A specified quasi-free resolution $\Omega\mathcal C\to\mathcal P$ of a
+reduced two-colored dg operad $\mathcal P$ identifies
+Maurer--Cartan elements of \eqref{eq:colored-convolution} with
+$\Omega\mathcal C$-algebra structures on $V$.  An operad cannot be placed in
+the cooperadic entry of \eqref{eq:colored-convolution} without such a bar or
+cobar construction.  Fixed endpoints may be imposed by twisting the full
+carrier by their base structure and taking the kernel of a strict filtered
+endpoint map.  If the endpoint map exists only up to coherent homotopy, its
+specified $L_\infty$ homotopy fibre is required; an unadorned mapping cone is
+only a complex and has no automatic nonlinear brackets.
+
+Assume now that the weight filtration is split and that every bracket has
+output weight equal to the sum of its input weights.  Write a positive-weight
+deformation as
+\[
+ \theta=\sum_{p\geq1}\theta^{(p)}.
+\]
+For a complete filtered $L_\infty$ carrier, the exact weight-$r$ equation is
+\[
+ q_1\theta^{(r)}+
+ \sum_{n=2}^{r}\frac1{n!}
+ \sum_{i_1+\cdots+i_n=r}
+ q_n(\theta^{(i_1)},\ldots,\theta^{(i_n)})=0.
+ \tag{5.11}\label{eq:general-weight-equation}
+\]
+In the dg Lie case, a closed binary term $\theta^{(1)}$ has the first
+curvature
+\[
+ \Curv(\theta^{(1)})
+ \equiv\frac12[\theta^{(1)},\theta^{(1)}]\pmod {W^3},
+ \tag{5.12}\label{eq:arity-three-curvature}
+\]
+and a ternary correction must solve
+\[
+ d\theta^{(2)}=-\frac12[\theta^{(1)},\theta^{(1)}].
+ \tag{5.13}\label{eq:ternary-correction}
+\]
+This is the universal arity-three obstruction; its value in a particular
+geometric theory depends on the specified colored compositions and signs.
+
+\section{Representatives, gauge classes, and derived limits}
+
+Compatible representatives have an elementary limit theorem.
+
+\begin{theorem}[Limit of Maurer--Cartan representatives]
+\label{thm:representative-limit}
+For an additively filtered dg Lie algebra, the map
+\[
+ \MC(\mathfrak g)\longrightarrow
+ \varprojlim_r\MC(\mathfrak g/F^r\mathfrak g)
+ \tag{6.1}\label{eq:mc-limit}
+\]
+is surjective if
+\[
+ \mathfrak g^1\longrightarrow
+ \varprojlim_r(\mathfrak g/F^r\mathfrak g)^1
+\]
+is surjective and $\bigcap_rF^r\mathfrak g^2=0$.  It is injective if
+$\bigcap_rF^r\mathfrak g^1=0$.  In particular, strict completeness and
+separation give a bijection in \eqref{eq:mc-limit}.
+\end{theorem}
+
+\begin{proof}
+A compatible family on the right has a degree-one lift $a\in\mathfrak g^1$
+under the stated surjectivity.  Its curvature has zero image in every
+quotient, so degree-two separation gives $\Curv(a)=0$.  Degree-one separation
+gives uniqueness.  No derived-limit term occurs because the representatives
+were already compatible.
+\end{proof}
+
+The same proof applies to \eqref{eq:linfty-curvature} under strict
+completeness and the additive convergence hypotheses.  Vanishing of every
+$H^2(A_r)$ is a convenient sufficient condition for constructing a
+compatible dg Lie sequence recursively from the zero element in
+$\mathfrak g/F^1\mathfrak g$.  The mere nonemptiness of each finite solution
+set does not choose such a sequence.
+
+Gauge classes obey a homotopical limit theorem instead.  Assume for the
+remainder of this paragraph that $\mathfrak g$ is strictly complete and
+separated, and put
+\[
+ X_r=\MC_\bullet(\mathfrak g/F^r\mathfrak g),
+ \qquad
+ X=\MC_\bullet(\mathfrak g)=\varprojlim_rX_r,
+ \tag{6.2}\label{eq:tower-mc-spaces}
+\]
+where the tensor products in $X$ are completed.  The $X_r$ are Kan complexes,
+and the maps $X_{r+1}\to X_r$ are Kan fibrations.  For a compatible
+basepoint $a=(a_r)$, the Milnor sequence for a tower of fibrations gives an
+exact sequence of pointed sets
+\[
+ *\longrightarrow
+ \varprojlim\nolimits^1_r\pi_1(X_r,a_r)
+ \longrightarrow
+ \pi_0(X)
+ \longrightarrow
+ \varprojlim_r\pi_0(X_r)
+ \longrightarrow *.
+ \tag{6.3}\label{eq:gauge-milnor}
+\]
+Here $\varprojlim^1$ is the nonabelian orbit-set construction for a tower of
+groups.  The group $\pi_1(X_r,a_r)$ is the derived stabilizer; in dg Lie
+terms it is $H^0((\mathfrak g/F^r)^{a_r})$ with its Campbell--Hausdorff group
+law.  Thus compatible finite-stage gauge classes have a global class, but
+they determine it uniquely only when the pointed set
+\[
+ \varprojlim\nolimits^1_r\pi_1(X_r,a_r)
+ \tag{6.4}\label{eq:stabilizer-lim1}
+\]
+is trivial.  A Mittag--Leffler stabilizer tower, in particular a tower with
+surjective transition maps, is a standard sufficient condition.  The exact
+sequence \eqref{eq:gauge-milnor} is the degree-zero case of the homotopy-limit
+sequence for towers of fibrations \cite{Hirschhorn}.
+
+There is a related, but distinct, $\varprojlim^1$ for compatible primitives.
+For a countable inverse system of cochain complexes $(C_r,p_r)$, let
+\[
+ s:\prod_rC_r\longrightarrow\prod_rC_r,
+ \qquad
+ s((c_r))=(p_r(c_{r+1})).
+\]
+Then
+\[
+ \Rlim C_r\simeq
+ \Cone\!\left(1-s:\prod_rC_r\longrightarrow\prod_rC_r\right)[-1]
+ \tag{6.5}\label{eq:derived-limit-cone}
+\]
+and there is a natural exact sequence
+\[
+ 0\longrightarrow
+ \varprojlim\nolimits^1_rH^{j-1}(C_r)
+ \longrightarrow H^j(\Rlim C_r)
+ \longrightarrow\varprojlim_rH^j(C_r)
+ \longrightarrow0.
+ \tag{6.6}\label{eq:cohomology-milnor}
+\]
+Indeed, products are exact in vector spaces, so
+$H^j(\prod_rC_r)=\prod_rH^j(C_r)$.  The long exact cohomology sequence of
+\eqref{eq:derived-limit-cone} identifies its two adjacent terms with the
+cokernel of $1-s$ on $\prod_rH^{j-1}(C_r)$ and the kernel of $1-s$ on
+$\prod_rH^j(C_r)$, which are respectively $\varprojlim^1H^{j-1}(C_r)$ and
+$\varprojlim H^j(C_r)$.
+When the transition maps are degreewise surjective, the ordinary inverse
+limit represents \eqref{eq:derived-limit-cone}.  This does not force the
+left term of \eqref{eq:cohomology-milnor} to vanish, because the induced
+cohomology maps need not be Mittag--Leffler.
+
+Under this degreewise-surjectivity hypothesis, suppose compatible cocycles
+$c_r\in Z^j(C_r)$ are exact at every stage.
+Choose $b_r$ with $db_r=-c_r$.  Then
+\[
+ \delta_r=b_r-p_r(b_{r+1})\in Z^{j-1}(C_r)
+ \tag{6.7}\label{eq:primitive-defect}
+\]
+represents the residual class in
+$\varprojlim^1H^{j-1}(C_r)$.  Compatible primitives exist precisely when the
+single class of $(c_r)$ in $H^j(\Rlim C_r)$ vanishes; after stagewise
+vanishing, this is equivalent to the vanishing of the residual
+\eqref{eq:primitive-defect}.  There is no natural decomposition of this
+class as an element of
+\[
+ \varprojlim H^j(C_r)\oplus
+ \varprojlim\nolimits^1H^{j-1}(C_r)
+\]
+without a chosen splitting of \eqref{eq:cohomology-milnor}.  For ordinary
+Maurer--Cartan curvature $j=2$, so the residual primitive group is
+$\varprojlim^1H^1$, not $\varprojlim^1H^0$.
+Without a quasi-isomorphism
+$\varprojlim C_r\to\Rlim C_r$, derived vanishing controls a
+homotopy-coherent primitive and need not produce a strictly compatible one.
+
+\section{Sharp failures}
+
+\begin{example}[Separated but incomplete]\label{ex:incomplete}
+Let $\mathfrak a^1=t\Bbbk[t]$, with zero differential and bracket, and
+$F^r\mathfrak a^1=t^r\Bbbk[t]$.  The compatible elements
+\[
+ a_r=t+t^2+\cdots+t^{r-1}
+ \in\mathfrak a/F^r\mathfrak a
+\]
+are Maurer--Cartan.  No element of $t\Bbbk[t]$ represents their limit
+$\sum_{j\geq1}t^j$.  Separation without completeness does not give
+surjectivity in \eqref{eq:mc-limit}.
+\end{example}
+
+\begin{example}[Complete quotients with hidden curvature]\label{ex:nonsep}
+Use the dg Lie algebra of Example~\ref{ex:first}, but put
+\[
+ F^1\mathfrak g=\mathfrak g,
+ \qquad
+ F^r\mathfrak g=\Bbbk z\quad(r\geq2).
+\]
+Every quotient sees $x$ as Maurer--Cartan, while
+$\Curv(x)=z\neq0$.  The curvature lies in
+$\bigcap_rF^r\mathfrak g^2$.  Degree-two separation in
+Theorem~\ref{thm:representative-limit} is therefore necessary.
+\end{example}
+
+\begin{example}[A non-Mittag--Leffler cohomology tower]
+\label{ex:nonml}
+Let
+\[
+ C_r=\left[
+ \Bbbk[x]\xrightarrow{\bmod x^r}\Bbbk[x]/(x^r)
+ \right]
+\]
+in degrees $0$ and $1$, with transition maps the identity in degree $0$ and
+the quotient in degree $1$.  These maps are degreewise surjective, but
+\[
+ H^0(C_r)=(x^r),
+ \qquad H^1(C_r)=0,
+\]
+and the maps on $H^0$ are the proper inclusions
+$(x^{r+1})\hookrightarrow(x^r)$.  Hence
+\[
+ \varprojlim_rC_r=
+ \left[\Bbbk[x]\hookrightarrow\Bbbk[[x]]\right],
+ \qquad
+ H^1(\varprojlim C_r)=\Bbbk[[x]]/\Bbbk[x]
+ \cong\varprojlim\nolimits^1_r(x^r).
+ \tag{7.1}\label{eq:nonml-calculation}
+\]
+The compatible degree-one cocycles
+\[
+ 1+x+\cdots+x^{r-1}\pmod{x^r}
+\]
+are exact separately, but their formal-series limit has no polynomial
+primitive.
+\end{example}
+
+\begin{example}[Finite gauge classes do not determine the total class]
+\label{ex:gauge-lim1}
+Regard
+\[
+ \mathfrak a^0=\Bbbk[x],
+ \qquad
+ \mathfrak a^1=\Bbbk[[x]],
+ \qquad
+ d(f)=f,
+ \qquad [-,-]=0
+\]
+as an abelian dg Lie algebra, and set, for $r\geq2$,
+\[
+ F^r\mathfrak a^0=0,
+ \qquad
+ F^r\mathfrak a^1=x^{r-1}\Bbbk[[x]],
+ \qquad F^1\mathfrak a=\mathfrak a.
+\]
+It is strictly complete and separated.  In every finite quotient the map
+$d:\mathfrak a^0\to\mathfrak a^1/F^r$ is surjective, so there is one gauge
+class.  Globally,
+\[
+ \MC(\mathfrak a)/\text{gauge}
+ =H^1(\mathfrak a)
+ =\Bbbk[[x]]/\Bbbk[x].
+ \tag{7.2}\label{eq:gauge-counterexample}
+\]
+This is precisely the $\varprojlim^1$ ambiguity in
+\eqref{eq:gauge-milnor}.
+\end{example}
+
+\begin{example}[Stagewise solvability in a curved algebra]
+\label{ex:curved}
+Let $K^1=\Bbbk[t]$, $K^2=\Bbbk[[t]]$, let $d:K^1\to K^2$ be inclusion,
+and let the bracket vanish.  Give this curved abelian dg Lie algebra the
+curvature
+\[
+ \omega=\sum_{j\geq0}t^j
+\]
+and filtration
+\[
+ F^1K=K,
+ \qquad
+ F^rK^1=0,
+ \qquad
+ F^rK^2=t^{r-1}\Bbbk[[t]]\quad(r\geq2).
+\]
+The filtered complex is strictly complete.  In $K/F^rK$, the curved
+Maurer--Cartan equation $\omega+da=0$ has the solution
+\[
+ a_r=-(1+t+\cdots+t^{r-2}).
+\]
+There is no compatible family of solutions: compatibility would force one
+polynomial to agree with $-\omega$ to every order.  Thus the nonemptiness of
+every finite solution set does
+not replace a compatible sequence.  More fundamentally, a nullary bracket in a
+curved $L_\infty$ algebra makes $q_1^2$ contain a bracket with $q_0$; the
+cohomology group in \eqref{eq:shifted-obstruction} is then unavailable unless
+additional filtration hypotheses make the associated-graded unary operator
+square to zero.  The main theorems are therefore flat.
+\end{example}
+
+\begin{example}[Completeness without additive convergence]
+Let $L^0=\Bbbk x$, $L^1=\Bbbk z$, and define shifted brackets by
+\[
+ q_n(x^n)=n!z\quad(n\geq2),
+\]
+with every bracket containing $z$ equal to zero.  All $L_\infty$ identities
+hold because every composite bracket vanishes.  The discrete filtration
+$F^1L=L$, $F^2L=0$ is complete and separated, but it is not additive for the
+higher brackets.  The series $R(x)=\sum_{n\geq2}z$ does not converge.  In the
+same way, $\mathfrak{sl}_2(\Bbbk)[[t]]$ with
+$F^1\mathfrak g=\mathfrak g$ and
+$F^r\mathfrak g=t^{r-1}\mathfrak g$ for $r\geq2$ is complete but not
+additively filtered: a constant adjoint action need not converge in the
+$t$-adic topology.  Completeness is useful only after the operations have
+been shown to move terms deeper.
+\end{example}
+
+\section{Mathematical scope}
+
+The preceding results apply to a mixed holomorphic--topological deformation
+problem once the following mathematical data are supplied:
+\begin{enumerate}
+ \item a semicosimplicial diagram of complete local deformation dg Lie
+ algebras with strict filtration-preserving cofaces, or a separately
+ specified complete filtered $L_\infty$ homotopy-limit carrier;
+ \item a positive additive filtration and completed tensor products for all
+ infinite operation spaces;
+ \item full filtered $L_\infty$ comparison morphisms, including their higher
+ Taylor coefficients;
+ \item for an operadic model, a reduced conilpotent colored cooperad and a
+ specified quasi-free resolution, together with its continuous colored
+ endomorphism object;
+ \item a flat total carrier with zero nullary bracket.  Additional BV or
+ central terms must be incorporated into a square-zero unary operator and
+ compatible higher brackets.  A genuinely curved carrier is covered only
+ after twisting by a specified Maurer--Cartan basepoint makes its nullary
+ bracket vanish and preserves the additive filtration.
+\end{enumerate}
+An arbitrary chain of deformation complexes is not a totalization: its
+diagram, homotopy coherences, cross-operations, and total differential must
+be given.  Likewise, projected obstruction classes are consequences of the
+total class, not coordinates of it unless joint detection such as
+\eqref{eq:joint-injectivity} is proved.
+
+For the dg Lie alternative in item 1, Theorem~\ref{thm:total-obstruction} and
+Theorem~\ref{thm:representative-limit} give the filtered-and-totalized
+obstruction tower.  For a separately specified complete flat
+$L_\infty$ carrier, Proposition~\ref{prop:linfty-obstruction} gives its
+successive obstruction classes and the same completeness argument gives the
+limit of compatible representatives.  These results do not by themselves
+construct a particular mixed holomorphic--topological colored carrier or
+evaluate its arity-three class; that value is the explicit composition
+\eqref{eq:arity-three-curvature} in the chosen chain-level model.
+
+\begin{thebibliography}{99}
+
+\bibitem{DolgushevRogers}
+V.~A. Dolgushev and C.~L. Rogers,
+\emph{A version of the Goldman--Millson theorem for filtered
+$L_\infty$-algebras},
+J. Algebra \textbf{430} (2015), 260--302.
+
+\bibitem{FiorenzaManettiMartinengo}
+D. Fiorenza, M. Manetti, and E. Martinengo,
+\emph{Semicosimplicial DGLAs in deformation theory},
+Comm. Algebra \textbf{40} (2012), 2243--2260.
+
+\bibitem{Getzler}
+E. Getzler,
+\emph{Lie theory for nilpotent $L_\infty$-algebras},
+Ann. of Math. (2) \textbf{170} (2009), 271--301.
+
+\bibitem{Hirschhorn}
+P.~S. Hirschhorn,
+\emph{The homotopy groups of the inverse limit of a tower of fibrations},
+arXiv:1507.01627.
+
+\bibitem{RobertNicoudWierstra}
+D. Robert-Nicoud and F. Wierstra,
+\emph{Convolution algebras and the deformation theory of
+infinity-morphisms},
+Homology Homotopy Appl. \textbf{21} (2019), no.~1, 351--373.
+
+\bibitem{RogersComplete}
+C.~L. Rogers,
+\emph{Complete $L_\infty$-algebras and their homotopy theory},
+J. Pure Appl. Algebra \textbf{227} (2023), 107403.
+
+\end{thebibliography}
 
 \end{document}
