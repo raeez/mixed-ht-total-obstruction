@@ -4,76 +4,168 @@
 \usepackage[margin=1.15in]{geometry}
 \usepackage[hidelinks]{hyperref}
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem{problem}[theorem]{Open Problem}
-\title{Total Maurer--Cartan Obstructions in Mixed Holomorphic--Topological Theory}
+\newtheorem{example}[theorem]{Example}
+\title{Maurer--Cartan Obstructions in Filtered dg Lie Algebras}
 \author{Raeez Lorgat}
 \date{}
 \hypersetup{
-  pdftitle={Total Maurer--Cartan Obstructions in Mixed Holomorphic--Topological Theory},
+  pdftitle={Maurer--Cartan Obstructions in Filtered dg Lie Algebras},
   pdfauthor={Raeez Lorgat},
   pdfsubject={Filtered differential graded Lie algebra obstruction theory}
 }
 \begin{document}
 \maketitle
+
 \begin{abstract}
-A local binary operation does not by itself determine a global all-arity
-open--closed theory.  We formulate the missing step as a complete filtered
-Maurer--Cartan problem and identify the obstruction encountered when a
-solution is lifted through one filtration stage.  Application to a concrete
-mixed holomorphic--topological theory requires the construction of the
-relevant descent algebra and is left open.
+Lifting a Maurer--Cartan solution through one step of a descending filtration
+is governed by a degree-two cohomology class.  This statement is finite: it
+requires neither completeness nor passage to an inverse limit.  We prove the
+lifting criterion, exhibit a two-step nilpotent differential graded Lie
+algebra with a nonzero obstruction, and then state the separate completeness
+hypothesis that turns compatible stagewise lifts into an actual
+Maurer--Cartan element.
 \end{abstract}
 
-\section{The governing lifting problem}
+\section{The lifting problem}
 
-Let $(\mathfrak g,F^\bullet)$ be a complete descending filtered differential
-graded Lie algebra over a field of characteristic zero, with
+Let $\Bbbk$ be a field of characteristic zero.  A descending filtered
+differential graded Lie algebra is a differential graded Lie algebra
+$(\mathfrak g,d,[-,-])$ together with subcomplexes
 \[
- \mathfrak g\cong\varprojlim_r\mathfrak g/F^r\mathfrak g,
- \qquad [F^a\mathfrak g,F^b\mathfrak g]\subset F^{a+b}\mathfrak g,
- \qquad dF^a\mathfrak g\subset F^a\mathfrak g.
+ \mathfrak g=F^1\mathfrak g\supset F^2\mathfrak g\supset\cdots,
+ \qquad
+ [F^a\mathfrak g,F^b\mathfrak g]\subset F^{a+b}\mathfrak g.
 \]
-For $\alpha\in F^1\mathfrak g^1$, write
-$\mathcal F(\alpha)=d\alpha+\tfrac12[\alpha,\alpha]$.
+For $\alpha\in F^1\mathfrak g^1$, its curvature and twisted derivation are
+\[
+ \mathcal F(\alpha)=d\alpha+\frac12[\alpha,\alpha],
+ \qquad d_\alpha=d+[\alpha,-].
+\]
 
 \begin{theorem}[One-stage obstruction]
-Suppose $\mathcal F(\alpha)\in F^{r}\mathfrak g^2$ for $r\geq2$.  Its class
+Fix $r\geq2$ and suppose
+$\mathcal F(\alpha)\in F^r\mathfrak g^2$.  On
+$F^r\mathfrak g/F^{r+1}\mathfrak g$, the operator $d_\alpha$ induces the
+same differential as $d$, and the class
 \[
- o_r(\alpha)=[\mathcal F(\alpha)]\in
- H^2(F^r\mathfrak g/F^{r+1}\mathfrak g,d_\alpha)
+ o_r(\alpha)=[\mathcal F(\alpha)]
+ \in H^2(F^r\mathfrak g/F^{r+1}\mathfrak g,d)
 \]
-is defined, where $d_\alpha=d+[\alpha,-]$.  A correction
-$\beta\in F^r\mathfrak g^1$ with
-$\mathcal F(\alpha+\beta)\in F^{r+1}\mathfrak g^2$ exists if and only if
-$o_r(\alpha)=0$.
+is defined.  There is a correction $\beta\in F^r\mathfrak g^1$ such that
+\[
+ \mathcal F(\alpha+\beta)\in F^{r+1}\mathfrak g^2
+\]
+if and only if $o_r(\alpha)=0$.
 \end{theorem}
 
 \begin{proof}
-On $F^r\mathfrak g/F^{r+1}\mathfrak g$, the term $[\alpha,-]$ vanishes,
-so $d_\alpha$ induces the differential $d$.  Equivalently,
-$d_\alpha^2=[\mathcal F(\alpha),-]$ vanishes on this quotient because
-$[F^r\mathfrak g,F^r\mathfrak g]\subset F^{2r}\mathfrak g\subset
-F^{r+1}\mathfrak g$.
-The Bianchi identity gives
-$d_\alpha\mathcal F(\alpha)=0$.  Modulo $F^{r+1}$, changing $\alpha$ by
-$\beta\in F^r\mathfrak g^1$ changes its curvature by $d_\alpha\beta$;
-the quadratic term $[\beta,\beta]/2$ lies in $F^{2r}\subset F^{r+1}$.
-Thus the curvature can be killed at the next stage precisely when its class
-is exact.
+Since $\alpha\in F^1\mathfrak g$, the operator $[\alpha,-]$ maps
+$F^r\mathfrak g$ into $F^{r+1}\mathfrak g$; hence $d_\alpha$ induces $d$ on
+the quotient.  The Bianchi identity
+\[
+ d_\alpha\mathcal F(\alpha)=0
+\]
+then says that the image of $\mathcal F(\alpha)$ is a $d$-cocycle.  For
+$\beta\in F^r\mathfrak g^1$,
+\[
+ \mathcal F(\alpha+\beta)
+ =\mathcal F(\alpha)+d_\alpha\beta+\frac12[\beta,\beta].
+\]
+Modulo $F^{r+1}\mathfrak g$, the middle term becomes $d\beta$ and the last
+term vanishes because $F^{2r}\mathfrak g\subset F^{r+1}\mathfrak g$.
+Thus a correction exists precisely when the curvature cocycle is a
+coboundary, with the sign absorbed by replacing a primitive by its negative.
 \end{proof}
 
-\section{The mixed theory still to be constructed}
+No completeness assumption occurs in the statement or proof: every object in
+the obstruction class belongs to the single quotient
+$F^r\mathfrak g/F^{r+1}\mathfrak g$.
 
-For a mixed holomorphic--topological application, the desired
-$\mathfrak g$ must totalize local operations, open--closed actions, centre
-maps, cover descent, counterterms, and comparison homotopies in one declared
-grading and completion.  Naming these components separately does not prove
-that their brackets close or that the inverse limit is derived-complete.
+\section{A nonzero obstruction}
 
-\begin{problem}
-Construct this filtered algebra for one nontrivial Stein or formal local model,
-compute its first nonzero obstruction class, and either construct compatible
-primitives at every arity or prove that no such global lift exists.
-\end{problem}
+\begin{example}
+Let $\mathfrak g$ be the two-dimensional graded vector space
+\[
+ \mathfrak g^1=\Bbbk x,
+ \qquad \mathfrak g^2=\Bbbk z,
+\]
+with zero differential and graded Lie bracket
+\[
+ [x,x]=2z,
+ \qquad [x,z]=[z,z]=0.
+\]
+The element $z$ is central, so the graded Jacobi identity holds and
+$\mathfrak g$ is two-step nilpotent.  Give it the filtration
+\[
+ F^1\mathfrak g=\mathfrak g,
+ \qquad F^2\mathfrak g=\Bbbk z,
+ \qquad F^r\mathfrak g=0\quad(r\geq3).
+\]
+For $\alpha=x$, one has
+\[
+ \mathcal F(x)=z\in F^2\mathfrak g^2.
+\]
+The complex $F^2\mathfrak g/F^3\mathfrak g$ has zero differential and no
+degree-one part.  Therefore
+\[
+ o_2(x)=[z]\neq0
+ \quad\text{in}\quad
+ H^2(F^2\mathfrak g/F^3\mathfrak g)\cong\Bbbk z,
+\]
+and no correction in $F^2\mathfrak g^1=0$ can lift $x$ to a
+Maurer--Cartan element modulo $F^3$.
+\end{example}
+
+\section{Passage from stages to a limit}
+
+The filtration is \emph{strictly complete and separated} if the canonical
+map of complexes
+\[
+ \mathfrak g\longrightarrow\varprojlim_r\mathfrak g/F^r\mathfrak g
+\]
+is an isomorphism.  This condition is not needed at any finite stage, but it
+is the elementary hypothesis that makes an infinite sum of corrections an
+element of $\mathfrak g$.
+
+\begin{proposition}[Compatible lifts]
+Assume that $\mathfrak g$ is strictly complete and separated.  Suppose
+$\alpha_1\in F^1\mathfrak g^1$ satisfies
+$\mathcal F(\alpha_1)\in F^2\mathfrak g^2$ and, for every $r\geq2$, there is
+$\beta_r\in F^r\mathfrak g^1$ such that, recursively,
+\[
+ \alpha_r=\alpha_1+\sum_{j=2}^{r-1}\beta_j,
+ \qquad
+ \mathcal F(\alpha_r)\in F^r\mathfrak g^2,
+ \qquad
+ \mathcal F(\alpha_r+\beta_r)\in F^{r+1}\mathfrak g^2.
+\]
+Then the convergent sum
+\[
+ \alpha_\infty=\alpha_1+\sum_{r\geq2}\beta_r
+\]
+is a Maurer--Cartan element of $\mathfrak g$.
+\end{proposition}
+
+\begin{proof}
+The partial sums are compatible in every quotient
+$\mathfrak g/F^r\mathfrak g$, so strict completeness gives a unique limit
+$\alpha_\infty\in\mathfrak g^1$.  The differential and bracket are continuous
+for the filtration.  For every $r$, the image of
+$\mathcal F(\alpha_\infty)$ in $\mathfrak g/F^r\mathfrak g$ equals the image
+of $\mathcal F(\alpha_r)$ and is zero.  Separatedness therefore implies
+$\mathcal F(\alpha_\infty)=0$.
+\end{proof}
+
+\paragraph{Derived completeness.}
+Let $D$ denote the derived inverse limit of the quotient tower
+$(\mathfrak g/F^r\mathfrak g)_r$.  Derived completeness means that the
+canonical map $\mathfrak g\to D$ is a quasi-isomorphism.  Here the quotient
+maps are surjective in every degree, so the ordinary limit represents $D$;
+strict completeness implies derived completeness.  The converse does not
+supply an elementwise convergent sum in $\mathfrak g$, which is why the
+proposition uses strict completeness.  Neither condition enters the
+one-stage theorem.
+
 \end{document}
