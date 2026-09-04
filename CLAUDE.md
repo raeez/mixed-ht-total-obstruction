@@ -1,5 +1,7 @@
 # Repository Instructions
 
+## Golden rule: no project management at any scale whatsoever in the manuscript
+
 Follow `AGENTS.md`. No project management may enter a reader-facing manuscript
 at any scale. A total Maurer--Cartan equation is meaningful only after its
 filtered complete carrier, brackets, convergence, and comparison maps are
